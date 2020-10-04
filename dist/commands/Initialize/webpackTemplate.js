@@ -58,7 +58,7 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
         const configPlugin = {
             entry: path.resolve('${appName}/source/js/${configEntry}'),
             resolve: {
-                extensions: ['.ts', '.tsx', '.js']
+                extensions: ['.ts', '.tsx', '.js', '.jsx']
             },
             output: {
                 path: path.resolve('${appName}/dist'),
@@ -84,7 +84,7 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
         const config = {
             entry: path.resolve('${appName}/source/${entry}'),
             resolve: {
-                extensions: ['.ts', '.tsx', '.js']
+                extensions: ['.ts', '.tsx', '.js', '.jsx']
             },
             output: {
                 path: path.resolve('${appName}/dist'),
@@ -114,7 +114,7 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
                 ${type === 'Plugin' &&
         `configPlugin.devtool='source-map';`}
             }
-          
+
             if (argv.mode === 'production') {
               //...
             }
