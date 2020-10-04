@@ -67,25 +67,47 @@ const generateAppFolder = (option) => {
         if (!packageJSON.devDependencies) {
             packageJSON.devDependencies = {};
         }
-        packageJSON.devDependencies.webpack = "^4.30.0";
-        packageJSON.devDependencies['webpack-cli'] = "^3.2.3";
-        packageJSON.devDependencies['babel-loader'] = "^8.0.5";
-        packageJSON.devDependencies['style-loader'] = "^0.23.1";
-        packageJSON.devDependencies['css-loader'] = "^2.1.0";
-        packageJSON.devDependencies['core-js'] = "^3.2.1";
-        packageJSON.devDependencies['regenerator-runtime'] = "^0.13.3";
-        packageJSON.devDependencies["@babel/core"] = "^7.3.3";
-        packageJSON.devDependencies["@babel/preset-env"] = "^7.3.1";
-        packageJSON.devDependencies["@babel/plugin-proposal-class-properties"] = "^7.3.3";
-        packageJSON.devDependencies["@babel/plugin-syntax-dynamic-import"] = "^7.2.0";
-        if (!packageJSON.scripts) {
-            packageJSON.scripts = {};
+        if (!packageJSON.devDependencies.webpack) {
+            packageJSON.devDependencies.webpack = "^4.30.0";
         }
-        if (option['useTypescript']) {
+        if (!packageJSON.devDependencies['webpack-cli']) {
+            packageJSON.devDependencies['webpack-cli'] = "^3.2.3";
+        }
+        if (!packageJSON.devDependencies['babel-loader']) {
+            packageJSON.devDependencies['babel-loader'] = "^8.0.5";
+        }
+        if (!packageJSON.devDependencies['style-loader']) {
+            packageJSON.devDependencies['style-loader'] = "^0.23.1";
+        }
+        if (!packageJSON.devDependencies['css-loader']) {
+            packageJSON.devDependencies['css-loader'] = "^2.1.0";
+        }
+        if (!packageJSON.devDependencies['core-js']) {
+            packageJSON.devDependencies['core-js'] = "^3.2.1";
+        }
+        if (!packageJSON.devDependencies['regenerator-runtime']) {
+            packageJSON.devDependencies['regenerator-runtime'] = "^0.13.3";
+        }
+        if (!packageJSON.devDependencies["@babel/core"]) {
+            packageJSON.devDependencies["@babel/core"] = "^7.3.3";
+        }
+        if (!packageJSON.devDependencies["@babel/preset-env"]) {
+            packageJSON.devDependencies["@babel/preset-env"] = "^7.3.1";
+        }
+        if (!packageJSON.devDependencies["@babel/plugin-proposal-class-properties"]) {
+            packageJSON.devDependencies["@babel/plugin-proposal-class-properties"] = "^7.3.3";
+        }
+        if (!packageJSON.devDependencies["@babel/plugin-syntax-dynamic-import"]) {
+            packageJSON.devDependencies["@babel/plugin-syntax-dynamic-import"] = "^7.2.0";
+        }
+        if (option['useTypescript'] && !packageJSON.devDependencies["@babel/preset-typescript"]) {
             packageJSON.devDependencies["@babel/preset-typescript"] = "^7.3.3";
         }
-        if (option['useReact']) {
+        if (option['useReact'] && !packageJSON.devDependencies["@babel/preset-react"]) {
             packageJSON.devDependencies["@babel/preset-react"] = "^7.0.0";
+        }
+        if (!packageJSON.scripts) {
+            packageJSON.scripts = {};
         }
         packageJSON.scripts[`build-${option['appName']}`] = `webpack --config ${option['appName']}/webpack.config.js`;
         jsonfile_1.writeFileSync(`package.json`, packageJSON, { spaces: 4, EOL: "\r\n" });
@@ -132,10 +154,16 @@ const generateAppFolder = (option) => {
         if (!packageJSON.devDependencies) {
             packageJSON.devDependencies = {};
         }
-        packageJSON.devDependencies.typescript = "^3.6.3";
+        if (!packageJSON.devDependencies.typescript) {
+            packageJSON.devDependencies.typescript = "^3.6.3";
+        }
         if (option['useReact']) {
-            packageJSON.devDependencies['@types/react'] = "^16.8.16";
-            packageJSON.devDependencies["@types/react-dom"] = "^16.8.4";
+            if (!packageJSON.devDependencies['@types/react']) {
+                packageJSON.devDependencies['@types/react'] = "^16.8.16";
+            }
+            if (!packageJSON.devDependencies["@types/react-dom"]) {
+                packageJSON.devDependencies["@types/react-dom"] = "^16.8.4";
+            }
         }
         const tsConfigJSON = {
             "compilerOptions": {
@@ -166,8 +194,12 @@ const generateAppFolder = (option) => {
         if (!packageJSON.devDependencies) {
             packageJSON.devDependencies = {};
         }
-        packageJSON.devDependencies['@kintone/plugin-packer'] = "^2.0.7";
-        packageJSON.devDependencies['@kintone/plugin-uploader'] = "3.0.5";
+        if (!packageJSON.devDependencies['@kintone/plugin-packer']) {
+            packageJSON.devDependencies['@kintone/plugin-packer'] = "^2.0.7";
+        }
+        if (!packageJSON.devDependencies['@kintone/plugin-uploader']) {
+            packageJSON.devDependencies['@kintone/plugin-uploader'] = "3.0.5";
+        }
         manifestJSON['uploadConfig']['icon'] = `${option['appName']}/icon.png`;
         jsonfile_1.writeFileSync(`package.json`, packageJSON, { spaces: 4, EOL: "\r\n" });
         fs_1.writeFileSync(`${option['appName']}/pluginConfig.html`, '');
@@ -192,15 +224,21 @@ const generateAppFolder = (option) => {
             manifestJSON['uploadConfig']['config']['js'] = [`${manifestJSON['appName']}/dist/config.min.js`];
     }
     else {
-        packageJSON.devDependencies["@kintone/customize-uploader"] = "^2.0.5";
+        if (!packageJSON.devDependencies["@kintone/customize-uploader"]) {
+            packageJSON.devDependencies["@kintone/customize-uploader"] = "^2.0.5";
+        }
         jsonfile_1.writeFileSync(`package.json`, packageJSON, { spaces: 4, EOL: "\r\n" });
     }
     if (option['useReact']) {
         if (!packageJSON.dependencies) {
             packageJSON.dependencies = {};
         }
-        packageJSON.dependencies.react = "^16.8.6";
-        packageJSON.dependencies['react-dom'] = "^16.7.0";
+        if (!packageJSON.dependencies.react) {
+            packageJSON.dependencies.react = "^16.8.6";
+        }
+        if (packageJSON.dependencies['react-dom']) {
+            packageJSON.dependencies['react-dom'] = "^16.7.0";
+        }
         jsonfile_1.writeFileSync(`package.json`, packageJSON, { spaces: 4, EOL: "\r\n" });
     }
     if (option['useCybozuLint']) {
@@ -235,8 +273,12 @@ const generateAppFolder = (option) => {
         if (!packageJSON.devDependencies) {
             packageJSON.devDependencies = {};
         }
-        packageJSON.devDependencies['eslint'] = '^6.5.1';
-        packageJSON.devDependencies['@cybozu/eslint-config'] = '>=7.1.0';
+        if (!packageJSON.devDependencies['eslint']) {
+            packageJSON.devDependencies['eslint'] = '^6.5.1';
+        }
+        if (!packageJSON.devDependencies['@cybozu/eslint-config']) {
+            packageJSON.devDependencies['@cybozu/eslint-config'] = '>=7.1.0';
+        }
         jsonfile_1.writeFileSync(`package.json`, packageJSON, { spaces: 2, EOL: "\r\n" });
         // create .eslintrc.js file according to customization structure
         let eslintRcTemplete = eslintRcTemplate_1.buildEslintRcTemplate(option);
