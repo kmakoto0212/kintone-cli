@@ -17,7 +17,15 @@ const generateAppFolder = (option) => {
     if (option['appID']) {
         manifestJSON['appID'] = option['appID'];
     }
-    manifestJSON['appName'] = option['appName'];
+    manifestJSON['appName'] = {
+        'ja': option['appName'],
+        'en': option['appName']
+    };
+    manifestJSON['description'] = {
+        'ja': 'kintone plugin.',
+        'en': 'kintone plugin.'
+    };
+    manifestJSON['buildDir'] = `${option['appName']}/dist`;
     manifestJSON['type'] = option['type'];
     manifestJSON['scope'] = option['scope'];
     if (fs_1.existsSync(option['appName'])) {

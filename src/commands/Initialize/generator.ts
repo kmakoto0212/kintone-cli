@@ -21,7 +21,15 @@ const generateAppFolder = (option: AppOption): string | boolean => {
         manifestJSON['appID'] = option['appID']
     }
 
-    manifestJSON['appName'] = option['appName']
+    manifestJSON['appName'] = {
+        'ja': option['appName'],
+        'en': option['appName']
+    }
+    manifestJSON['description'] = {
+        'ja': 'kintone plugin.',
+        'en': 'kintone plugin.'
+    }
+    manifestJSON['buildDir'] = `${option['appName']}/dist`
     manifestJSON['type'] = option['type']
     manifestJSON['scope'] = option['scope']
 
@@ -29,7 +37,7 @@ const generateAppFolder = (option: AppOption): string | boolean => {
         return 'App folder existed'
     }
 
-    mkdirSync(option['appName']);
+    mkdirSync(option['appName'])
     mkdirSync(`${option['appName']}/source`)
     mkdirSync(`${option['appName']}/source/js`)
     mkdirSync(`${option['appName']}/source/css`)
