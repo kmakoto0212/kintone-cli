@@ -1,4 +1,4 @@
-import * as spawn from "cross-spawn"
+import * as spawn from 'cross-spawn'
 import {writeFileSync} from 'jsonfile'
 import { unlinkSync, existsSync, readdirSync, renameSync, readFileSync } from 'fs';
 
@@ -20,14 +20,14 @@ const buildPlugin = (option: object) => {
     manifestJSON['type'] = 'APP'
     manifestJSON['icon'] = option['uploadConfig']['icon']
     manifestJSON['name'] = {
-        "en": option['appName']['en'] ? option['appName']['en'] : option['appName'],
-        "ja" : option['appName']['ja'] ? option['appName']['ja'] : option['appName']
+        'en': (option['appName']['en'] ? option['appName']['en'] : option['appName']),
+        'ja' : (option['appName']['ja'] ? option['appName']['ja'] : option['appName'])
     }
     if (option['uploadConfig'] && option['uploadConfig']['name']) manifestJSON['name'] = option['uploadConfig']['name']
 
     manifestJSON['description'] = {
-        "en": option['description']['en'] ? option['description']['en'] : "Kintone Plugin",
-        "ja" : option['description']['ja'] ? option['description']['ja'] : "Kintone Plugin"
+        'en': (option['description']['en'] ? option['description']['en'] : 'Kintone Plugin'),
+        'ja' : (option['description']['ja'] ? option['description']['ja'] : 'Kintone Plugin')
     }
     if (option['uploadConfig'] && option['uploadConfig']['description']) manifestJSON['description'] = option['uploadConfig']['description']
 
@@ -41,7 +41,7 @@ const buildPlugin = (option: object) => {
         if (!htmlContent) delete manifestJSON['config']
     }
     
-    writeFileSync(`manifest.json`,manifestJSON,{spaces: 4, EOL: "\r\n"})
+    writeFileSync(`manifest.json`,manifestJSON,{spaces: 4, EOL: '\r\n'})
 
     const buildDir = option['buildDir'] ? option['buildDir'] : `${option['appName']}/dist`
     let paramArr = ['./' ,'--out', `${buildDir}/plugin.zip`]

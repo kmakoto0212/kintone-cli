@@ -18,14 +18,14 @@ const buildPlugin = (option) => {
     manifestJSON['type'] = 'APP';
     manifestJSON['icon'] = option['uploadConfig']['icon'];
     manifestJSON['name'] = {
-        "en": option['appName']['en'] ? option['appName']['en'] : option['appName'],
-        "ja": option['appName']['ja'] ? option['appName']['ja'] : option['appName']
+        'en': (option['appName']['en'] ? option['appName']['en'] : option['appName']),
+        'ja': (option['appName']['ja'] ? option['appName']['ja'] : option['appName'])
     };
     if (option['uploadConfig'] && option['uploadConfig']['name'])
         manifestJSON['name'] = option['uploadConfig']['name'];
     manifestJSON['description'] = {
-        "en": option['description']['en'] ? option['description']['en'] : "Kintone Plugin",
-        "ja": option['description']['ja'] ? option['description']['ja'] : "Kintone Plugin"
+        'en': (option['description']['en'] ? option['description']['en'] : 'Kintone Plugin'),
+        'ja': (option['description']['ja'] ? option['description']['ja'] : 'Kintone Plugin')
     };
     if (option['uploadConfig'] && option['uploadConfig']['description'])
         manifestJSON['description'] = option['uploadConfig']['description'];
@@ -39,7 +39,7 @@ const buildPlugin = (option) => {
         if (!htmlContent)
             delete manifestJSON['config'];
     }
-    jsonfile_1.writeFileSync(`manifest.json`, manifestJSON, { spaces: 4, EOL: "\r\n" });
+    jsonfile_1.writeFileSync(`manifest.json`, manifestJSON, { spaces: 4, EOL: '\r\n' });
     const buildDir = option['buildDir'] ? option['buildDir'] : `${option['appName']}/dist`;
     let paramArr = ['./', '--out', `${buildDir}/plugin.zip`];
     if (fs_1.existsSync(`${buildDir}/private.ppk`)) {
