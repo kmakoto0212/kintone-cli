@@ -18,12 +18,14 @@ const buildPlugin = (option) => {
     manifestJSON['type'] = 'APP';
     manifestJSON['icon'] = option['uploadConfig']['icon'];
     manifestJSON['name'] = {
-        "en": option['appName']
+        "en": option['appName']['en'] ? option['appName']['en'] : option['appName'],
+        "ja": option['appName']['ja'] ? option['appName']['ja'] : option['appName']
     };
     if (option['uploadConfig'] && option['uploadConfig']['name'])
         manifestJSON['name'] = option['uploadConfig']['name'];
     manifestJSON['description'] = {
-        "en": "Kintone Plugin"
+        "en": option['description']['en'] ? option['description']['en'] : "Kintone Plugin",
+        "ja": option['description']['ja'] ? option['description']['ja'] : "Kintone Plugin"
     };
     if (option['uploadConfig'] && option['uploadConfig']['description'])
         manifestJSON['description'] = option['uploadConfig']['description'];
