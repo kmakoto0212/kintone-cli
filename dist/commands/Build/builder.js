@@ -40,19 +40,20 @@ const buildPlugin = (option) => {
             delete manifestJSON['config'];
     }
     jsonfile_1.writeFileSync(`manifest.json`, manifestJSON, { spaces: 4, EOL: "\r\n" });
-    let paramArr = ['./', '--out', `${option['appName']}/dist/plugin.zip`];
-    if (fs_1.existsSync(`${option['appName']}/dist/private.ppk`)) {
+    const buildDir = option['buildDir'] ? option['buildDir'] : `${option['appName']}/dist`;
+    let paramArr = ['./', '--out', `${buildDir}/plugin.zip`];
+    if (fs_1.existsSync(`${buildDir}/private.ppk`)) {
         paramArr.push('--ppk');
-        paramArr.push(`${option['appName']}/dist/private.ppk`);
+        paramArr.push(`${buildDir}/private.ppk`);
     }
     spawnSync('./node_modules/.bin/kintone-plugin-packer', paramArr, {
         stdio: 'inherit'
     });
-    if (!fs_1.existsSync(`${option['appName']}/dist/private.ppk`)) {
-        let keyFileName = fs_1.readdirSync(`${option['appName']}/dist`).filter((name) => {
+    if (!fs_1.existsSync(`${buildDir}/private.ppk`)) {
+        let keyFileName = fs_1.readdirSync(buildDir).filter((name) => {
             return /.ppk$/.test(name);
         });
-        fs_1.renameSync(`${option['appName']}/dist/${keyFileName[0]}`, `${option['appName']}/dist/private.ppk`);
+        fs_1.renameSync(`${buildDir}/${keyFileName[0]}`, `${buildDir}/private.ppk`);
     }
     fs_1.unlinkSync(`manifest.json`);
 };

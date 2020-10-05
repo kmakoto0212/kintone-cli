@@ -43,10 +43,11 @@ const buildPlugin = (option: object) => {
     
     writeFileSync(`manifest.json`,manifestJSON,{spaces: 4, EOL: "\r\n"})
 
-    let paramArr = ['./' ,'--out', `${option['appName']}/dist/plugin.zip`]
-    if (existsSync(`${option['appName']}/dist/private.ppk`)) {
+    const buildDir = option['buildDir'] ? option['buildDir'] : `${option['appName']}/dist`
+    let paramArr = ['./' ,'--out', `${buildDir}/plugin.zip`]
+    if (existsSync(`${buildDir}/private.ppk`)) {
         paramArr.push('--ppk')
-        paramArr.push(`${option['appName']}/dist/private.ppk`)
+        paramArr.push(`${buildDir}/private.ppk`)
     }
     
     spawnSync(
@@ -57,11 +58,11 @@ const buildPlugin = (option: object) => {
         }
     )
 
-    if (!existsSync(`${option['appName']}/dist/private.ppk`)) {
-        let keyFileName = readdirSync(`${option['appName']}/dist`).filter((name: string)=>{
+    if (!existsSync(`${buildDir}/private.ppk`)) {
+        let keyFileName = readdirSync(buildDir).filter((name: string)=>{
             return /.ppk$/.test(name)
         })
-        renameSync(`${option['appName']}/dist/${keyFileName[0]}`,`${option['appName']}/dist/private.ppk`)
+        renameSync(`${buildDir}/${keyFileName[0]}`,`${buildDir}/private.ppk`)
     }
 
     unlinkSync(`manifest.json`)
