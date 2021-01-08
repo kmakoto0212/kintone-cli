@@ -173,15 +173,11 @@ const generateAppFolder = (option: AppOption): string | boolean => {
 
     manifestJSON["uploadConfig"] = {
       desktop: {
-        js: [
-          `${manifestJSON["appName"]}/dist/${manifestJSON["appName"]}.min.js`,
-        ],
+        js: [`${option["appName"]}/dist/${option["appName"]}.min.js`],
         css: [],
       },
       mobile: {
-        js: [
-          `${manifestJSON["appName"]}/dist/${manifestJSON["appName"]}.min.js`,
-        ],
+        js: [`${option["appName"]}/dist/${option["appName"]}.min.js`],
       },
     };
   } else {
@@ -302,8 +298,8 @@ const generateAppFolder = (option: AppOption): string | boolean => {
 
     manifestJSON["uploadConfig"]["config"] = {
       html: `${option["appName"]}/pluginConfig.html`,
-      js: [`${manifestJSON["appName"]}/source/js/config.js`],
-      css: [`${manifestJSON["appName"]}/source/css/config.css`],
+      js: [`${option["appName"]}/source/js/config.js`],
+      css: [`${option["appName"]}/source/css/config.css`],
       required_params: [],
     };
 
@@ -315,7 +311,7 @@ const generateAppFolder = (option: AppOption): string | boolean => {
 
     if (option.useReact)
       manifestJSON["uploadConfig"]["config"]["js"] = [
-        `${manifestJSON["appName"]}/dist/config.min.js`,
+        `${option["appName"]}/dist/config.min.js`,
       ];
   } else {
     if (!packageJSON.devDependencies["@kintone/customize-uploader"]) {
