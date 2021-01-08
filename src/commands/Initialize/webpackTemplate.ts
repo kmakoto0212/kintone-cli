@@ -1,11 +1,17 @@
-import {WebpackParams} from '../../dto/app'
-const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, type}:WebpackParams):string => {
-    let jsRules: string
-    let configEntry
-    let pluginConfig = ''
-    if (useTypescript) {
-        configEntry = 'config.ts'
-        jsRules = `{
+import { WebpackParams } from "../../dto/app";
+const buildWebpackReactTemplate = ({
+  entry,
+  useTypescript,
+  useReact,
+  appName,
+  type,
+}: WebpackParams): string => {
+  let jsRules: string;
+  let configEntry;
+  let pluginConfig = "";
+  if (useTypescript) {
+    configEntry = "config.ts";
+    jsRules = `{
                 test: /\.ts?$/,
                 exclude: /node_modules/,
                 use: {
@@ -14,9 +20,9 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
                         presets: ['@babel/preset-typescript']
                     }
                 }
-            },`
-        if (useReact) {
-            jsRules += `{
+            },`;
+    if (useReact) {
+      jsRules += `{
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -25,21 +31,20 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
                         presets: ['@babel/react', '@babel/preset-typescript']
                     }
                 }
-            },`
-            configEntry = 'config.tsx'
-        }
+            },`;
+      configEntry = "config.tsx";
     }
-    else {
-        configEntry = 'config.js'
-        jsRules = `{
+  } else {
+    configEntry = "config.js";
+    jsRules = `{
                 test: /\.js?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 }
-            },`
-        if (useReact) {
-            jsRules += `{
+            },`;
+    if (useReact) {
+      jsRules += `{
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: {
@@ -48,12 +53,12 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
                             presets: ['@babel/react']
                         }
                     }
-                },`
-            configEntry = 'config.jsx'
-        }
+                },`;
+      configEntry = "config.jsx";
     }
-    if (type === 'Plugin') {
-        pluginConfig = `
+  }
+  if (type === "Plugin") {
+    pluginConfig = `
         const configPlugin = {
             entry: path.resolve('${appName}/source/js/${configEntry}'),
             resolve: {
@@ -77,9 +82,9 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
                 maxAssetSize: 10000000
             }
         }
-        `
-    }
-    return `const path = require('path');
+        `;
+  }
+  return `const path = require('path');
         const config = {
             entry: path.resolve('${appName}/source/${entry}'),
             resolve: {
@@ -110,26 +115,21 @@ const buildWebpackReactTemplate = ({entry, useTypescript, useReact, appName, typ
             'use strict';
             if (argv.mode === 'development') {
                 config.devtool = 'source-map';
-                ${
-                    type === 'Plugin' &&
-                    `configPlugin.devtool='source-map';`
-                }
+                ${type === "Plugin" && `configPlugin.devtool='source-map';`}
             }
 
             if (argv.mode === 'production') {
               //...
             }
             ${
-                type === 'Plugin' ?
-                'return [config, configPlugin];':
-                'return [config];'
+              type === "Plugin"
+                ? "return [config, configPlugin];"
+                : "return [config];"
             }
-        };`
-}
+        };`;
+};
 export default {
-    buildWebpackReactTemplate
-}
+  buildWebpackReactTemplate,
+};
 
-export {
-    buildWebpackReactTemplate
-}
+export { buildWebpackReactTemplate };

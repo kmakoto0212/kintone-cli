@@ -51,22 +51,19 @@ const App = () => {
 })();
 `;
 const generateSample = ({ useTypescript, useReact }) => {
-    if (useReact) {
-        if (useTypescript) {
-            return tsxSample;
-        }
-        else {
-            return jsxSample;
-        }
+  if (useReact) {
+    if (useTypescript) {
+      return tsxSample;
+    } else {
+      return jsxSample;
     }
-    else {
-        if (useTypescript) {
-            return tsSample;
-        }
-        else {
-            return jsSample;
-        }
+  } else {
+    if (useTypescript) {
+      return tsSample;
+    } else {
+      return jsSample;
     }
+  }
 };
 exports.generateSample = generateSample;
 exports.default = generateSample;

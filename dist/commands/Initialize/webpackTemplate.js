@@ -1,12 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, type }) => {
-    let jsRules;
-    let configEntry;
-    let pluginConfig = '';
-    if (useTypescript) {
-        configEntry = 'config.ts';
-        jsRules = `{
+const buildWebpackReactTemplate = ({
+  entry,
+  useTypescript,
+  useReact,
+  appName,
+  type,
+}) => {
+  let jsRules;
+  let configEntry;
+  let pluginConfig = "";
+  if (useTypescript) {
+    configEntry = "config.ts";
+    jsRules = `{
                 test: /\.ts?$/,
                 exclude: /node_modules/,
                 use: {
@@ -16,8 +22,8 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
                     }
                 }
             },`;
-        if (useReact) {
-            jsRules += `{
+    if (useReact) {
+      jsRules += `{
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -27,20 +33,19 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
                     }
                 }
             },`;
-            configEntry = 'config.tsx';
-        }
+      configEntry = "config.tsx";
     }
-    else {
-        configEntry = 'config.js';
-        jsRules = `{
+  } else {
+    configEntry = "config.js";
+    jsRules = `{
                 test: /\.js?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 }
             },`;
-        if (useReact) {
-            jsRules += `{
+    if (useReact) {
+      jsRules += `{
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: {
@@ -50,11 +55,11 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
                         }
                     }
                 },`;
-            configEntry = 'config.jsx';
-        }
+      configEntry = "config.jsx";
     }
-    if (type === 'Plugin') {
-        pluginConfig = `
+  }
+  if (type === "Plugin") {
+    pluginConfig = `
         const configPlugin = {
             entry: path.resolve('${appName}/source/js/${configEntry}'),
             resolve: {
@@ -79,8 +84,8 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
             }
         }
         `;
-    }
-    return `const path = require('path');
+  }
+  return `const path = require('path');
         const config = {
             entry: path.resolve('${appName}/source/${entry}'),
             resolve: {
@@ -111,20 +116,21 @@ const buildWebpackReactTemplate = ({ entry, useTypescript, useReact, appName, ty
             'use strict';
             if (argv.mode === 'development') {
                 config.devtool = 'source-map';
-                ${type === 'Plugin' &&
-        `configPlugin.devtool='source-map';`}
+                ${type === "Plugin" && `configPlugin.devtool='source-map';`}
             }
 
             if (argv.mode === 'production') {
               //...
             }
-            ${type === 'Plugin' ?
-        'return [config, configPlugin];' :
-        'return [config];'}
+            ${
+              type === "Plugin"
+                ? "return [config, configPlugin];"
+                : "return [config];"
+            }
         };`;
 };
 exports.buildWebpackReactTemplate = buildWebpackReactTemplate;
 exports.default = {
-    buildWebpackReactTemplate
+  buildWebpackReactTemplate,
 };
 //# sourceMappingURL=webpackTemplate.js.map

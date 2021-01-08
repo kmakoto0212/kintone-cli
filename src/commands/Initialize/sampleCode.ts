@@ -5,7 +5,7 @@ const jsSample = `(function() {
         return event;
     });
 })();
-`
+`;
 const jsxSample = `import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
@@ -21,7 +21,7 @@ const App = () => {
         
         return event;
     });
-})();`
+})();`;
 const tsSample = `(() => {
     'use strict';
     kintone.events.on('app.record.index.show', event => {
@@ -29,7 +29,7 @@ const tsSample = `(() => {
     
         return event;
     });
-})();`
+})();`;
 const tsxSample = `import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -47,27 +47,22 @@ const App = () => {
         return event;
     });
 })();
-`
+`;
 
-const generateSample = ({useTypescript, useReact}): string => {
-    if (useReact) {
-        if (useTypescript) {
-            return tsxSample
-        }
-        else {
-            return jsxSample
-        }
+const generateSample = ({ useTypescript, useReact }): string => {
+  if (useReact) {
+    if (useTypescript) {
+      return tsxSample;
+    } else {
+      return jsxSample;
     }
-    else {
-        if (useTypescript) {
-            return tsSample
-        }
-        else {
-            return jsSample
-        }
+  } else {
+    if (useTypescript) {
+      return tsSample;
+    } else {
+      return jsSample;
     }
-}
-export {
-    generateSample
-}
-export default generateSample
+  }
+};
+export { generateSample };
+export default generateSample;

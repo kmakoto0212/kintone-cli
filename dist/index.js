@@ -9,11 +9,9 @@ const lintCommand_1 = require("./commands/Lint/lintCommand");
 const devCommand_1 = require("./commands/Dev/devCommand");
 const authCommand_1 = require("./commands/Auth/authCommand");
 const path = require("path");
-global['cliRoot'] = path.resolve(path.dirname(require.main.filename) + "/../");
-global['currentDir'] = process.cwd();
-program
-    .version('0.1.6')
-    .description('kintone Node CLI');
+global["cliRoot"] = path.resolve(path.dirname(require.main.filename) + "/../");
+global["currentDir"] = process.cwd();
+program.version("0.1.6").description("kintone Node CLI");
 initializeCommand_1.default(program);
 buildCommand_1.default(program);
 deployCommand_1.default(program);
