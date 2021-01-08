@@ -33,6 +33,7 @@ const initializeCommand = (program: CommanderStatic) => {
     .option("-i, --app-id <appID>", "Set app ID for customization")
     .option("-l, --use-cybozu-lint", "Use cybozu eslint rules")
     .option("--proxy <proxyURL>", "Proxy URL")
+    .option("--no-install", "Remove packages install")
     .action(async (cmd) => {
       cmd.appID = cmd.appId;
       let error = validator.appValidator(cmd);
@@ -243,8 +244,13 @@ const initializeCommand = (program: CommanderStatic) => {
           console.log(chalk.red(err));
           return;
         }
-        console.log(chalk.yellow("Installing dependencies..."));
-        spawnSync("npm", ["install"], { stdio: "inherit", windowsHide: true });
+        if (cmd.install) {
+          console.log(chalk.yellow("Installing dependencies..."));
+          spawnSync("npm", ["install"], {
+            stdio: "inherit",
+            windowsHide: true,
+          });
+        }
         console.log("");
         if (!appSetting.setAuth) {
           console.log(chalk.yellow("To set auth info, use:"));
