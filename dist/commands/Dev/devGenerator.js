@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.devPlugin = exports.devCustomize = void 0;
 const deployer_1 = require("../Deploy/deployer");
 const fs_1 = require("fs");
 const spawn = require("cross-spawn");

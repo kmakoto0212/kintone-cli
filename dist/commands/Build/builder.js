@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildPlugin = exports.buildVanillaJS = exports.buildUsingWebpack = void 0;
 const spawn = require("cross-spawn");
 const jsonfile_1 = require("jsonfile");
 const fs_1 = require("fs");

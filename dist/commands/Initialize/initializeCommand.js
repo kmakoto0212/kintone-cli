@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -38,8 +39,8 @@ const initializeCommand = (program) => {
         .option("-i, --app-id <appID>", "Set app ID for customization")
         .option("-l, --use-cybozu-lint", "Use cybozu eslint rules")
         .option("--proxy <proxyURL>", "Proxy URL")
-        .option("--no-install", "Install dependencies is skip")
-        .action((cmd) => __awaiter(this, void 0, void 0, function* () {
+        .option("--no-install", "Remove packages install")
+        .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         cmd.appID = cmd.appId;
         let error = validator_1.default.appValidator(cmd);
         if (error && typeof error === "string") {
@@ -162,7 +163,7 @@ const initializeCommand = (program) => {
                     message: "What is the entry for webpack ?",
                     default: (curAnswers) => {
                         let ext = ".js";
-                        let tempOption = Object.assign({}, cmd, curAnswers);
+                        let tempOption = Object.assign(Object.assign({}, cmd), curAnswers);
                         if (tempOption["useReact"] && tempOption["useTypescript"]) {
                             ext = ".tsx";
                         }
@@ -244,7 +245,6 @@ const initializeCommand = (program) => {
                 console.log(chalk_1.default.red(err));
                 return;
             }
-            console.log(cmd.noInstall);
             if (cmd.install) {
                 console.log(chalk_1.default.yellow("Installing dependencies..."));
                 spawnSync("npm", ["install"], {
@@ -276,7 +276,7 @@ const initializeCommand = (program) => {
         .option("--install", "Install dependencies or not")
         .option("--quick", "Quickly create a kintone project")
         .option("-p, --project-name <projectName>", "Project name")
-        .action((cmd) => __awaiter(this, void 0, void 0, function* () {
+        .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         let packageInfo = {};
         if (cmd.quick) {
             packageInfo["name"] = "kintone-customization-project";
@@ -351,7 +351,7 @@ const initializeCommand = (program) => {
                         undefined,
             },
         ]);
-        packageInfo = Object.assign({}, packageInfo, answer);
+        packageInfo = Object.assign(Object.assign({}, packageInfo), answer);
         if (packageInfo["dependencies"]["@kintone/kintone-ui-component"])
             packageInfo["dependencies"]["@kintone/kintone-ui-component"] = latestUIComponentVersion;
         else
