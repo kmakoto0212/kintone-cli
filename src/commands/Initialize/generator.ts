@@ -183,6 +183,7 @@ const generateAppFolder = (option: AppOption): string | boolean => {
   packageJSON.devDependencies ??= {};
   if (option["useTypescript"]) {
     packageJSON.devDependencies.typescript ??= "^3.6.3";
+    packageJSON.devDependencies["@kintone/dts-gen"] ??= "^3.1.0";
     if (option["useReact"]) {
       packageJSON.devDependencies["@types/react"] ??= "^16.8.16";
       packageJSON.devDependencies["@types/react-dom"] ??= "^16.8.4";
@@ -193,6 +194,7 @@ const generateAppFolder = (option: AppOption): string | boolean => {
         typeRoots: ["../node_modules/@types"],
         noImplicitAny: false,
       },
+      files: ["../node_modules/@kintone/dts-gen/kintone.d.ts"],
       include: ["source/**/*.ts", "source/**/*.tsx"],
     };
 
@@ -201,21 +203,6 @@ const generateAppFolder = (option: AppOption): string | boolean => {
     }
 
     writeFileSync(`package.json`, packageJSON, { spaces: 4, EOL: "\r\n" });
-    if (option["useReact"]) {
-      writeFileSyncFS(
-        `${option["appName"]}/source/global.d.tsx`,
-        "declare let kintone: any;"
-      );
-      tsConfigJSON["compilerOptions"]["typeRoots"].push(
-        "./source/global.d.tsx"
-      );
-    } else {
-      writeFileSyncFS(
-        `${option["appName"]}/source/global.d.ts`,
-        "declare let kintone: any;"
-      );
-      tsConfigJSON["compilerOptions"]["typeRoots"].push("./source/global.d.ts");
-    }
 
     writeFileSync(`${option["appName"]}/tsconfig.json`, tsConfigJSON, {
       spaces: 4,
