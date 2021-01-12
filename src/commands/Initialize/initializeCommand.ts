@@ -83,6 +83,7 @@ const initializeCommand = (program: CommanderStatic) => {
           {
             type: "confirm",
             name: "setAuth",
+            default: false,
             message: "Do you want to set authentication credentials ?",
             when: cmd.setAuth === undefined,
           },
