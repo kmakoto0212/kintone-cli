@@ -7,7 +7,7 @@ const buildWebpackReactTemplate = ({
   type,
 }: WebpackParams): string => {
   let jsRules: string;
-  let configEntry;
+  let configEntry: string;
   let pluginConfig = "";
   if (useTypescript) {
     configEntry = "config.ts";
