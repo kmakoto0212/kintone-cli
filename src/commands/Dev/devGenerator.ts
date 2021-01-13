@@ -11,7 +11,7 @@ const cleanExit = (ws: ChildProcessWithoutNullStreams) => {
   ws.kill();
   process.exit();
 };
-const devCustomize = (ws, config: any) => {
+const devCustomize = (ws: ChildProcessWithoutNullStreams, config: any) => {
   // Attaching links to kintone
   console.log(chalk.yellow("Attaching links to kintone..."));
   try {
@@ -44,7 +44,7 @@ const devCustomize = (ws, config: any) => {
   }
 };
 
-const devPlugin = (ws, config: any) => {
+const devPlugin = (ws: ChildProcessWithoutNullStreams, config: any) => {
   console.log(chalk.yellow("Building plugin..."));
   try {
     buildPlugin(config);
