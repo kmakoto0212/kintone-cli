@@ -16,24 +16,23 @@
   ],
   "dependencies": {
     "axios": "^0.21.1",
-    "chalk": "^2.4.2",
-    "commander": "^2.19.0",
-    "cross-spawn": "^6.0.5",
-    "inquirer": "^6.2.1",
-    "jsonfile": "^5.0.0",
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "cross-spawn": "^7.0.3",
+    "inquirer": "^7.3.3",
+    "jsonfile": "^6.1.0",
     "prettier": "^2.2.1",
-    "strip-ansi": "^5.2.0"
+    "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
-    "@types/cross-spawn": "^6.0.0",
-    "@types/inquirer": "^6.0.0",
-    "@types/jsonfile": "^5.0.0",
-    "@types/node": "^11.13.0",
+    "@types/cross-spawn": "^6.0.2",
+    "@types/inquirer": "^7.3.1",
+    "@types/jsonfile": "^6.0.0",
+    "@types/node": "^14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "eslint": "^7.17.0",
-    "lodash": "^4.17.19",
-    "tsc": "^1.20150623.0",
+    "lodash": "^4.17.20",
     "typescript": "^4.1.3"
   },
   "repository": {
