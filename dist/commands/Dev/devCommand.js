@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk_1 = require("chalk");
+const chalk = require("chalk");
 const jsonfile_1 = require("jsonfile");
 const spawn = require("cross-spawn");
 const strip_ansi_1 = require("strip-ansi");
@@ -35,7 +35,7 @@ const devCommand = (program) => {
         .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         let error = validator_1.default.devValidator(cmd);
         if (error && typeof error === "string") {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
             return;
         }
         process.on("SIGINT", () => {
@@ -44,10 +44,10 @@ const devCommand = (program) => {
         let watching = false;
         // build the first time and upload link to kintone
         if (fs_1.existsSync(`${cmd.appName}/webpack.config.js`)) {
-            console.log(chalk_1.default.yellow("Building distributed file..."));
+            console.log(chalk.yellow("Building distributed file..."));
             spawnSync("npm", ["run", `build-${cmd.appName}`, "--", "--mode", "development"], { stdio: ["ignore", "ignore", process.stderr] });
         }
-        console.log(chalk_1.default.yellow("Starting local webserver..."));
+        console.log(chalk.yellow("Starting local webserver..."));
         const ws = spawn("npm", ["run", "dev", "--", "--https"]);
         ws.stderr.on("data", (data) => {
             let webserverInfo = data.toString().replace("Serving at", "");
@@ -85,11 +85,11 @@ const devCommand = (program) => {
             }
             config.watch = cmd.watch;
             console.log("");
-            console.log(chalk_1.default.yellow(`Please open this link in your browser to trust kintone ${config.type} files:`));
+            console.log(chalk.yellow(`Please open this link in your browser to trust kintone ${config.type} files:`));
             console.log("");
-            console.log(`   ${chalk_1.default.green(`${serverAddr}`)}`);
+            console.log(`   ${chalk.green(`${serverAddr}`)}`);
             console.log("");
-            console.log(chalk_1.default.yellow("Then, press any key to continue:"));
+            console.log(chalk.yellow("Then, press any key to continue:"));
             process.stdin.on("data", () => {
                 if (!watching) {
                     watching = true;

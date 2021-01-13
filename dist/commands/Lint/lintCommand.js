@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk_1 = require("chalk");
+const chalk = require("chalk");
 const spawn = require("cross-spawn");
 const validator_1 = require("./validator");
 const spawnSync = spawn.sync;
@@ -21,13 +21,13 @@ const lintCommand = (program) => {
         .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         let error = validator_1.default.lintValidator(cmd);
         if (error && typeof error === "string") {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
             return;
         }
         process.on("SIGINT", () => {
             process.exit();
         });
-        console.log(chalk_1.default.yellow("Checking syntax..."));
+        console.log(chalk.yellow("Checking syntax..."));
         if (cmd.appName) {
             spawnSync("npm", ["run", `lint-${cmd.appName}${cmd.fix ? "-fix" : ""}`], { stdio: "inherit" });
         }

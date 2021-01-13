@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk_1 = require("chalk");
+const chalk = require("chalk");
 const spawn = require("cross-spawn");
 const inquirer_1 = require("inquirer");
 const validator_1 = require("./validator");
@@ -44,7 +44,7 @@ const initializeCommand = (program) => {
         cmd.appID = cmd.appId;
         let error = validator_1.default.appValidator(cmd);
         if (error && typeof error === "string") {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
             return;
         }
         try {
@@ -240,14 +240,14 @@ const initializeCommand = (program) => {
             };
             if (answer["proxy"] === "null")
                 appSetting.proxy = false;
-            console.log(chalk_1.default.yellow("Creating app..."));
+            console.log(chalk.yellow("Creating app..."));
             let err = generator_1.generateAppFolder(appSetting);
             if (err && typeof err === "string") {
-                console.log(chalk_1.default.red(err));
+                console.log(chalk.red(err));
                 return;
             }
             if (cmd.install) {
-                console.log(chalk_1.default.yellow("Installing dependencies..."));
+                console.log(chalk.yellow("Installing dependencies..."));
                 spawnSync("npm", ["install"], {
                     stdio: "inherit",
                     windowsHide: true,
@@ -255,20 +255,20 @@ const initializeCommand = (program) => {
             }
             console.log("");
             if (!appSetting.setAuth) {
-                console.log(chalk_1.default.yellow("To set auth info, use:"));
+                console.log(chalk.yellow("To set auth info, use:"));
                 console.log("");
-                console.log(chalk_1.default.greenBright(`     kintone-cli auth --app-name ${appSetting.appName}`));
+                console.log(chalk.greenBright(`     kintone-cli auth --app-name ${appSetting.appName}`));
                 console.log("");
             }
             else {
-                console.log(chalk_1.default.yellow("To start developing app, use:"));
+                console.log(chalk.yellow("To start developing app, use:"));
                 console.log("");
-                console.log(chalk_1.default.greenBright(`     kintone-cli dev --app-name ${appSetting.appName} --watch`));
+                console.log(chalk.greenBright(`     kintone-cli dev --app-name ${appSetting.appName} --watch`));
                 console.log("");
             }
         }
         catch (error) {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
         }
     }));
     program
@@ -290,8 +290,8 @@ const initializeCommand = (program) => {
             packageInfo["dependencies"]["@kintone/rest-api-client"] = true;
         }
         else {
-            console.log(chalk_1.default.yellow("Welcome to kintone-cli!"));
-            console.log(chalk_1.default.yellow("Please, input below information so we can get started!"));
+            console.log(chalk.yellow("Welcome to kintone-cli!"));
+            console.log(chalk.yellow("Please, input below information so we can get started!"));
         }
         if (cmd.projectName) {
             packageInfo["name"] = cmd.projectName;
@@ -364,7 +364,7 @@ const initializeCommand = (program) => {
         // create project folder
         const projectFolder = global["currentDir"] + "/" + packageInfo["name"];
         if (fs_1.existsSync(projectFolder)) {
-            console.error(chalk_1.default.red("Project folder already exists! Please, run the cli again and choose another project name."));
+            console.error(chalk.red("Project folder already exists! Please, run the cli again and choose another project name."));
             process.exit(-1);
         }
         fs_1.mkdirSync(projectFolder);
@@ -384,14 +384,14 @@ const initializeCommand = (program) => {
         fs_1.writeFileSync(`${projectFolder}/.gitignore`, "node_modules");
         // if install is specified run npm install
         if (cmd.install) {
-            console.log(chalk_1.default.yellow("Installing dependencies..."));
+            console.log(chalk.yellow("Installing dependencies..."));
             spawnSync("npm", ["i"], { stdio: "inherit", windowsHide: true });
         }
         console.log("");
-        console.log(chalk_1.default.yellow("Project created!"));
-        console.log(chalk_1.default.yellow("To create new app, use:"));
+        console.log(chalk.yellow("Project created!"));
+        console.log(chalk.yellow("To create new app, use:"));
         console.log("");
-        console.log(chalk_1.default.green("   kintone-cli create-template"));
+        console.log(chalk.green("   kintone-cli create-template"));
         console.log("");
     }));
 };

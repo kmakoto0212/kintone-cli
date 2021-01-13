@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk_1 = require("chalk");
+const chalk = require("chalk");
 const validator_1 = require("./validator");
 const jsonfile_1 = require("jsonfile");
 const deployer_1 = require("./deployer");
@@ -21,7 +21,7 @@ const deployCommand = (program) => {
         .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         let error = validator_1.default.deployValidator(cmd);
         if (error && typeof error === "string") {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
             return;
         }
         try {

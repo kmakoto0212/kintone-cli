@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const validator_1 = require("./validator");
-const chalk_1 = require("chalk");
+const chalk = require("chalk");
 const jsonfile_1 = require("jsonfile");
 const inquirer_1 = require("inquirer");
 const string_1 = require("../../utils/string");
@@ -27,7 +27,7 @@ const authCommand = (program) => {
         .action((cmd) => __awaiter(void 0, void 0, void 0, function* () {
         let error = validator_1.default.authValidator(cmd);
         if (error && typeof error === "string") {
-            console.log(chalk_1.default.red(error));
+            console.log(chalk.red(error));
             return;
         }
         let authJSON;
@@ -129,14 +129,14 @@ const authCommand = (program) => {
             spaces: 4,
             EOL: "\r\n",
         });
-        console.log(chalk_1.default.yellow("Set auth info complete."));
-        console.log(chalk_1.default.yellow("To start dev, use:"));
+        console.log(chalk.yellow("Set auth info complete."));
+        console.log(chalk.yellow("To start dev, use:"));
         console.log("");
-        console.log(chalk_1.default.greenBright(`     kintone-cli dev --app-name ${cmd["appName"]}`));
+        console.log(chalk.greenBright(`     kintone-cli dev --app-name ${cmd["appName"]}`));
         console.log("");
-        console.log(chalk_1.default.yellow("To deploy app, use:"));
+        console.log(chalk.yellow("To deploy app, use:"));
         console.log("");
-        console.log(chalk_1.default.greenBright(`     kintone-cli deploy --app-name ${cmd["appName"]}`));
+        console.log(chalk.greenBright(`     kintone-cli deploy --app-name ${cmd["appName"]}`));
         console.log("");
     }));
 };
