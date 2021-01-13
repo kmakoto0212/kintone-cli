@@ -1,5 +1,5 @@
 import { CommanderStatic } from "commander";
-import chalk from "chalk";
+import * as chalk from "chalk";
 import validator from "./validator";
 import { readFileSync } from "jsonfile";
 import { existsSync } from "fs";

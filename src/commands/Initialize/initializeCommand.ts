@@ -1,5 +1,5 @@
 import { CommanderStatic } from "commander";
-import chalk from "chalk";
+import * as chalk from "chalk";
 import * as spawn from "cross-spawn";
 import { prompt } from "inquirer";
 import validator from "./validator";

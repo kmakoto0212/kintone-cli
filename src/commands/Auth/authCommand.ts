@@ -1,6 +1,6 @@
 import { CommanderStatic } from "commander";
 import validator from "./validator";
-import chalk from "chalk";
+import * as chalk from "chalk";
 import { readFileSync, writeFileSync } from "jsonfile";
 import { prompt } from "inquirer";
 import { isDomain } from "../../utils/string";

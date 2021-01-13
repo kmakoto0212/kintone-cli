@@ -1,5 +1,5 @@
 import { CommanderStatic } from "commander";
-import chalk from "chalk";
+import * as chalk from "chalk";
 import { readFileSync } from "jsonfile";
 import * as spawn from "cross-spawn";
 import stripAnsi from "strip-ansi";
